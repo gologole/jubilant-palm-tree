@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+
+import "google/protobuf/empty.proto";
+
+package api;
+option go_package = "rpc/protogen";
+
+
+service OrderService {
+  rpc CreateOrder (NewOrder) returns (google.protobuf.Empty) {}
+  rpc GetOrder (google.protobuf.Empty) returns (NewOrder) {}
+  rpc UploadDocument(Response) returns (google.protobuf.Empty) {}
+}
+
+message Courier{
+  int64 id = 1;
+  string name = 2;
+  string type = 3;
+  int64 dist = 4;
+}
+
+
+message NewOrder {
+  int64 overprice = 1;
+  string Description = 2;
+}
+
+message Response{
+  int64 id = 1;
+  int64 price = 2;
+  int64 OverPrice = 3;
+  string Description = 4;
+  repeated Courier courierlist =5;
+  Courier yourcourier = 6;
+}
